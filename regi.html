@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean-Themed Registration Page</title>
+    <style>
+        body {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        height: 100vh; /* Full height of the viewport */
+        margin: 0; /* Remove default margin */
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #000000, #000000);
+        color: #ffffff;
+        font-weight: 800;
+        background: url('space.gif') no-repeat center center;
+        background-size: cover;
+}
+
+
+        h2 {
+            position: absolute; /* Positioning the h2 absolutely */
+            top: 20px; /* Distance from the top */
+            left: 20px; /* Distance from the left */
+            color: #000000; /* Change color as needed */
+            margin: 0; /* Remove default margin */
+            font-weight: 900;
+        }
+
+        form {
+        background: url('1-earth-from-space-kevin-a-horganscience-photo-library.jpg') no-repeat center center; /* Your image URL */
+        background-size: 110%; /* Adjust the size to make the image larger */
+        padding: 20px;
+        border-radius: 50%; /* Makes the container circular */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        width: 900px; /* Set a fixed width */
+        height: 900px; /* Set a fixed height */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative; /* Position relative for h2 */
+        font-weight: 900;
+        }
+
+
+        input, select, textarea {
+            width: 40%; /* Adjusted to fit within the circular container */
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #0099cc;
+            border-radius: 5px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.651); /* Semi-transparent background for inputs */
+            font-weight: 900;
+            
+        }
+
+        button {
+            background-color: #0099cc;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 900;
+            width: 30%; /* Adjusted to fit within the circular container */
+        }
+
+        button:hover {
+            background-color: #000000;
+        }
+
+        .error {
+            color: #e74c3c;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-label {
+            font-size: 16px;
+            color: #333;
+            font-weight: 900;
+        }
+        label
+        {
+            font-weight: 900;
+
+        }
+        #backgroundVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the video covers the whole area */
+            z-index: -1; /* Place it behind other content */
+        }
+        .circular-container {
+            width: 900px; /* Fixed width */
+            height: 900px; /* Fixed height */
+            border-radius: 50%; /* Makes it circular */
+            overflow: hidden; /* Hides overflow */
+            background: url('1-earth-from-space-kevin-a-horganscience-photo-library.jpg') no-repeat center center; /* Background image */
+            background-size: cover; /* Cover the entire circle */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative; /* For absolute positioning of the header */
+        }
+    </style>
+</head>
+<body>
+
+    
+<form id="registrationForm">
+    <label for="username">Username (3-15 characters):</label>
+    <input type="text" id="username" name="username" required>
+    <div class="error" id="usernameError"></div>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <div class="error" id="emailError"></div>
+
+    <label for="password">Password :</label>
+    <input type="password" id="password" name="password" required>
+    <div class="error" id="passwordError"></div>
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required>
+    <div class="error" id="confirmPasswordError"></div>
+
+    <label for="phone">Phone (10 digits):</label>
+    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
+    <div class="error" id="phoneError"></div>
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob" required>
+    <div class="error" id="dobError"></div>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender" required>
+        <option value="">Select...</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+    </select>
+    <div class="error" id="genderError"></div>
+
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" rows="3" required></textarea>
+    <div class="error" id="addressError"></div>
+
+    <div class="checkbox-container">
+        <input type="checkbox" id="terms" required>
+        <label class="checkbox-label" for="terms">I agree to the terms and conditions</label>
+    </div>
+    <div class="error" id="termsError"></div>
+
+    <button type="submit">Register</button>
+</form>
+
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        clearErrors();
+
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const phone = document.getElementById('phone').value;
+        const dob = document.getElementById('dob').value;
+        const gender = document.getElementById('gender').value;
+        const address = document.getElementById('address').value;
+        const terms = document.getElementById('terms').checked;
+
+        let valid = true;
+
+        // Username validation
+        if (!/^[a-zA-Z0-9]{3,15}$/.test(username)) {
+            valid = false;
+            document.getElementById('usernameError').textContent = "Username must be 3-15 characters long and can only contain letters and numbers.";
+        }
+
+        // Email validation
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            valid = false;
+            document.getElementById('emailError').textContent = "Please enter a valid email address.";
+        }
+
+        // Password validation
+        if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/.test(password)) {
+            valid = false;
+            document.getElementById('passwordError').textContent = "Password must be 8-20 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.";
+        }
+
+        // Confirm password validation
+        if (password !== confirmPassword) {
+            valid = false;
+            document.getElementById('confirmPasswordError').textContent = "Passwords do not match.";
+        }
+
+        // Phone validation
+        if (phone && !/^\d{10}$/.test(phone)) {
+            valid = false;
+            document.getElementById('phoneError').textContent = "Phone number must be 10 digits.";
+        }
+
+        // Date of Birth validation
+        const dobDate = new Date(dob);
+        const today = new Date();
+        if (dobDate >= today) {
+            valid = false;
+            document.getElementById('dobError').textContent = "Date of Birth must be in the past.";
+        }
+
+        // Gender validation
+        if (gender === "") {
+            valid = false;
+            document.getElementById('genderError').textContent = "Please select your gender.";
+        }
+
+        // Address validation
+        if (address.trim() === "") {
+            valid = false;
+            document.getElementById('addressError').textContent = "Address cannot be empty.";
+        }
+
+        // Terms validation
+        if (!terms) {
+            valid = false;
+            document.getElementById('termsError').textContent = "You must agree to the terms and conditions.";
+        }
+
+        if (valid) {
+            alert("Registration successful!");
+            // Here you would typically submit the form data to the server
+        }
+    });
+
+    function clearErrors() {
+        const errorElements = document.querySelectorAll('.error');
+        errorElements.forEach(element => {
+            element.textContent = "";
+        });
+    }
+</script>
+
+</body>
+</html>
